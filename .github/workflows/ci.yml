@@ -27,7 +27,7 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
-        name: Check GitHub Status
+        name: Check Docker Status
         uses: ./
 
   ci-fail:
