@@ -125,7 +125,7 @@ export const StatusNames = new Map<string, StatusCode>([
   ['degraded_performance', StatusCode.DegradedPerformance],
   ['partial_service_disruption', StatusCode.PartialServiceDisruption],
   ['service_disruption', StatusCode.ServiceDisruption],
-  ['security_event', StatusCode.SecurityEvent],
+  ['security_event', StatusCode.SecurityEvent]
 ]);
 
 export const getStatesName = (stateCode: StateCode): string | undefined => {

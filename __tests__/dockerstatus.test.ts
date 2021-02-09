@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as dockerstatus from '../src/dockerstatus';
-import {Status, StatusCode, StatusOverallEntity} from "../src/dockerstatus";
+import {Status, StatusCode, StatusOverallEntity} from '../src/dockerstatus';
 
 describe('dockerstatus', () => {
   it('returns docker status', async () => {
@@ -15,11 +15,11 @@ describe('status', () => {
     [
       'status.json',
       {
-        updated: "2021-02-05T06:41:14.332Z",
-        status: "Operational",
-        status_code: StatusCode.Operational,
-      } as StatusOverallEntity,
-    ],
+        updated: '2021-02-05T06:41:14.332Z',
+        status: 'Operational',
+        status_code: StatusCode.Operational
+      } as StatusOverallEntity
+    ]
   ])('given %p', async (file, expStatusOverall) => {
     jest.spyOn(dockerstatus, 'status').mockImplementation(
       (): Promise<Status> => {

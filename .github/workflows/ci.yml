@@ -37,9 +37,9 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
-        name: Check GitHub Status
+        name: Check Docker Hub registry Status
         continue-on-error: true
         uses: ./
         with:
-          overall_threshold: minor
-          pages_threshold: partial_outage
+          overall_threshold: degraded_performance
+          hub_registry_threshold: partial_service_disruption
