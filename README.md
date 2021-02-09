@@ -67,11 +67,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Check Docker Status
-        uses: crazy-max/ghaction-docker-status@v1
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Check Docker Hub Status
         with:
           overall_threshold: degraded_performance
-          hub_registry_threshold: partial_service_disruption
+          hub_registry_threshold: service_disruption
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: user/app:latest
 ```
 
 ## Customizing
