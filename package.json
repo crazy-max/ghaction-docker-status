@@ -1,0 +1,40 @@
+{
+  "name": "docker-status",
+  "description": "GitHub Action to check Docker system status in your workflow",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "tsc && ncc build",
+    "test": "jest --coverage",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "pre-checkin": "yarn run format && yarn run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crazy-max/ghaction-docker-status.git"
+  },
+  "keywords": [
+    "actions",
+    "docker",
+    "status",
+    "monitoring"
+  ],
+  "author": "CrazyMax",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/http-client": "^1.0.9",
+    "chalk": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "@types/node": "^14.11.2",
+    "@vercel/ncc": "^0.24.1",
+    "jest": "^26.0.1",
+    "jest-circus": "^26.0.1",
+    "jest-runtime": "^26.0.1",
+    "prettier": "^2.0.4",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
+  }
+}

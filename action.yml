@@ -1,0 +1,40 @@
+# https://help.github.com/en/articles/metadata-syntax-for-github-actions
+name: 'Docker Status'
+description: "GitHub Action to check Docker system status in your workflow"
+author: 'crazy-max'
+branding:
+  color: 'orange'
+  icon: 'alert-triangle'
+
+inputs:
+  overall_threshold:
+    description: 'Defines threshold for overall status (also called rollup) of Docker to fail the job'
+    required: false
+  package_repositories_threshold:
+    description: 'Defines threshold for Docker package repositories to fail the job'
+    required: false
+  hub_web_threshold:
+    description: 'Defines threshold for Docker Hub web to fail the job'
+    required: false
+  hub_registry_threshold:
+    description: 'Defines threshold for Docker Hub registry to fail the job'
+    required: false
+  hub_automated_builds_threshold:
+    description: 'Defines threshold for Docker Hub automated builds to fail the job'
+    required: false
+  web_threshold:
+    description: 'Defines threshold for Docker web to fail the job'
+    required: false
+  docs_threshold:
+    description: 'Defines threshold for Docker docs to fail the job'
+    required: false
+  community_forums_threshold:
+    description: 'Defines threshold for Docker community forums to fail the job'
+    required: false
+  support_site_threshold:
+    description: 'Defines threshold for Docker support site to fail the job'
+    required: false
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
