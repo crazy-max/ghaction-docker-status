@@ -57,8 +57,6 @@ In the example below we will set some status thresholds so that the job can fail
 
 This can be useful if you have an action that publishes to Docker Hub registry but the service is down.
 
-![Docker Hub registry status](.github/docker-status2.png)
-
 ```yaml
 name: build
 
