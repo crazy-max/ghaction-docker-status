@@ -19,6 +19,14 @@ describe('status', () => {
         status: 'Operational',
         status_code: StatusCode.Operational
       } as StatusOverallEntity
+    ],
+    [
+      'incident.json',
+      {
+        updated: '2021-04-03T15:25:55.730Z',
+        status: 'Partial Service Disruption',
+        status_code: StatusCode.PartialServiceDisruption
+      } as StatusOverallEntity
     ]
   ])('given %p', async (file, expStatusOverall) => {
     jest.spyOn(dockerstatus, 'status').mockImplementation(

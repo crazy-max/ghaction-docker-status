@@ -88,7 +88,7 @@ async function run() {
             break;
           }
         }
-        core.info(`  • ${compStatusText}${new Array(30 - compStatusText.length).join(' ')} ${component.name}`);
+        core.info(`  • ${compStatusText}${new Array(40 - compStatusText.length).join(' ')} ${component.name}`);
       });
 
       // Incidents
