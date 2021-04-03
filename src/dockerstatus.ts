@@ -49,7 +49,7 @@ export interface ContainersEntity {
 }
 
 export interface IncidentsEntity {
-  id: string;
+  _id: string;
   name: string;
   datetime_open: string;
   status: string;

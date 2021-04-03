@@ -177,7 +177,7 @@ function run() {
                             break;
                         }
                     }
-                    core.info(`  • ${compStatusText}${new Array(30 - compStatusText.length).join(' ')} ${component.name}`);
+                    core.info(`  • ${compStatusText}${new Array(40 - compStatusText.length).join(' ')} ${component.name}`);
                 }));
                 // Incidents
                 if (status.result.incidents != undefined && ((_b = status.result.incidents) === null || _b === void 0 ? void 0 : _b.length) > 0) {
