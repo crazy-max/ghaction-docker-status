@@ -80,6 +80,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Check Docker Hub Status
+        uses: crazy-max/ghaction-docker-status@v1
         with:
           overall_threshold: degraded_performance
           hub_registry_threshold: service_disruption
