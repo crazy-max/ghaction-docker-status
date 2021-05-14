@@ -29,11 +29,9 @@ describe('status', () => {
       } as StatusOverallEntity
     ]
   ])('given %p', async (file, expStatusOverall) => {
-    jest.spyOn(dockerstatus, 'status').mockImplementation(
-      (): Promise<Status> => {
-        return <Promise<Status>>require(path.join(__dirname, 'fixtures', file));
-      }
-    );
+    jest.spyOn(dockerstatus, 'status').mockImplementation((): Promise<Status> => {
+      return <Promise<Status>>require(path.join(__dirname, 'fixtures', file));
+    });
 
     const status = await dockerstatus.status();
     console.log(JSON.stringify(status, null, 2));
