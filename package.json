@@ -1,9 +1,8 @@
 {
   "name": "docker-status",
   "description": "GitHub Action to check Docker system status in your workflow",
-  "main": "lib/main.js",
+  "main": "src/main.ts",
   "scripts": {
-    "build": "tsc",
     "test": "jest --coverage",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
