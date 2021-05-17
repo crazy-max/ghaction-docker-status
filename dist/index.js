@@ -1,281 +1,6 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 8:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.status = exports.getStatusName = exports.getStatesName = exports.StatusNames = exports.StateNames = exports.Component = exports.StatusCode = exports.StateCode = void 0;
-const httpm = __nccwpck_require__(925);
-var StateCode;
-(function (StateCode) {
-    StateCode[StateCode["Investigating"] = 100] = "Investigating";
-    StateCode[StateCode["MajorIdentified"] = 200] = "MajorIdentified";
-    StateCode[StateCode["CriticalMonitoring"] = 300] = "CriticalMonitoring";
-})(StateCode = exports.StateCode || (exports.StateCode = {}));
-var StatusCode;
-(function (StatusCode) {
-    StatusCode[StatusCode["Operational"] = 100] = "Operational";
-    StatusCode[StatusCode["DegradedPerformance"] = 300] = "DegradedPerformance";
-    StatusCode[StatusCode["PartialServiceDisruption"] = 400] = "PartialServiceDisruption";
-    StatusCode[StatusCode["ServiceDisruption"] = 500] = "ServiceDisruption";
-    StatusCode[StatusCode["SecurityEvent"] = 600] = "SecurityEvent";
-})(StatusCode = exports.StatusCode || (exports.StatusCode = {}));
-var Component;
-(function (Component) {
-    Component["DockerPackageRepositories"] = "582c71aa40855b4d0e000240";
-    Component["DockerHubWeb"] = "533c6539221ae15e3f000040";
-    Component["DockerHubRegistry"] = "5342d1b837768a325c00000b";
-    Component["DockerHubAutomatedBuilds"] = "5342bc9420974b775d000008";
-    Component["DockerWeb"] = "53a1c83e814a437c5a00075a";
-    Component["DockerDocs"] = "5347131d545b2f12640000bc";
-    Component["DockerCommunityForums"] = "55b15ea10a54eb8c71000ebf";
-    Component["DockerSupportSite"] = "57f296dbe1401094660008e1";
-})(Component = exports.Component || (exports.Component = {}));
-exports.StateNames = new Map([
-    ['investigating', StateCode.Investigating],
-    ['major_identified', StateCode.MajorIdentified],
-    ['critical_monitoring', StateCode.CriticalMonitoring]
-]);
-exports.StatusNames = new Map([
-    ['operational', StatusCode.Operational],
-    ['degraded_performance', StatusCode.DegradedPerformance],
-    ['partial_service_disruption', StatusCode.PartialServiceDisruption],
-    ['service_disruption', StatusCode.ServiceDisruption],
-    ['security_event', StatusCode.SecurityEvent]
-]);
-const getStatesName = (stateCode) => {
-    for (let [key, val] of exports.StateNames) {
-        if (val == stateCode)
-            return key;
-    }
-};
-exports.getStatesName = getStatesName;
-const getStatusName = (statusCode) => {
-    for (let [key, val] of exports.StatusNames) {
-        if (val == statusCode)
-            return key;
-    }
-};
-exports.getStatusName = getStatusName;
-const status = () => __awaiter(void 0, void 0, void 0, function* () {
-    const http = new httpm.HttpClient('ghaction-docker-status');
-    return (yield http.getJson(`https://api.status.io/1.0/status/533c6539221ae15e3f000031`)).result;
-});
-exports.status = status;
-//# sourceMappingURL=dockerstatus.js.map
-
-/***/ }),
-
-/***/ 109:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-process.env.FORCE_COLOR = '2';
-const chalk = __nccwpck_require__(818);
-const core = __nccwpck_require__(186);
-const dockerstatus = __nccwpck_require__(8);
-const dockerstatus_1 = __nccwpck_require__(8);
-const utilm = __nccwpck_require__(24);
-let unhealthy = [];
-function run() {
-    var _a, _b;
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const status = yield dockerstatus.status();
-            if (status == null) {
-                core.setFailed(`Unable to contact Docker status API at this time.`);
-                return;
-            }
-            const overallThreshold = yield getStatus('overall_threshold');
-            const componentsThreshold = new Map([
-                [dockerstatus_1.Component.DockerPackageRepositories, yield getStatus('package_repositories_threshold')],
-                [dockerstatus_1.Component.DockerHubWeb, yield getStatus('hub_web_threshold')],
-                [dockerstatus_1.Component.DockerHubRegistry, yield getStatus('hub_registry_threshold')],
-                [dockerstatus_1.Component.DockerHubAutomatedBuilds, yield getStatus('hub_automated_builds_threshold')],
-                [dockerstatus_1.Component.DockerWeb, yield getStatus('web_threshold')],
-                [dockerstatus_1.Component.DockerDocs, yield getStatus('docs_threshold')],
-                [dockerstatus_1.Component.DockerCommunityForums, yield getStatus('community_forums_threshold')],
-                [dockerstatus_1.Component.DockerSupportSite, yield getStatus('support_site_threshold')]
-            ]);
-            // Overall
-            if (overallThreshold !== undefined && status.result.status_overall.status_code >= overallThreshold) {
-                unhealthy.push(`Overall (${dockerstatus_1.getStatusName(status.result.status_overall.status_code)} >= ${dockerstatus_1.getStatusName(overallThreshold)})`);
-            }
-            switch (status.result.status_overall.status_code) {
-                case dockerstatus_1.StatusCode.DegradedPerformance || dockerstatus_1.StatusCode.PartialServiceDisruption: {
-                    core.warning(`Docker status: ${status.result.status_overall.status}`);
-                    break;
-                }
-                case dockerstatus_1.StatusCode.ServiceDisruption || dockerstatus_1.StatusCode.SecurityEvent: {
-                    core.error(`Docker status: ${status.result.status_overall.status}`);
-                    break;
-                }
-                default: {
-                    core.info(`Docker status: ${status.result.status_overall.status}`);
-                    break;
-                }
-            }
-            // Components
-            if (status.result.status != undefined && ((_a = status.result.status) === null || _a === void 0 ? void 0 : _a.length) > 0) {
-                core.info(`\n• ${chalk.bold(`Components status`)}`);
-                yield utilm.asyncForEach(status.result.status, (component) => __awaiter(this, void 0, void 0, function* () {
-                    if (!Object.values(dockerstatus_1.Component).includes(component.id)) {
-                        core.info(chalk.cyan(`• ${component.name} is not implemented.`));
-                    }
-                    if (dockerstatus_1.getStatusName(component.status_code) === undefined) {
-                        core.warning(`Cannot resolve status ${component.status_code} for ${component.name}`);
-                        return;
-                    }
-                    const compThreshold = componentsThreshold.get(component.id);
-                    if (compThreshold !== undefined && component.status_code >= compThreshold) {
-                        unhealthy.push(`${component.name} (${dockerstatus_1.getStatusName(component.status_code)} >= ${dockerstatus_1.getStatusName(compThreshold)})`);
-                    }
-                    let compStatusText;
-                    switch (component.status_code) {
-                        case dockerstatus_1.StatusCode.Operational: {
-                            compStatusText = chalk.green('Operational');
-                            break;
-                        }
-                        case dockerstatus_1.StatusCode.DegradedPerformance: {
-                            compStatusText = chalk.magenta('Degraded performance');
-                            break;
-                        }
-                        case dockerstatus_1.StatusCode.PartialServiceDisruption: {
-                            compStatusText = chalk.yellow('Partial service disruption');
-                            break;
-                        }
-                        case dockerstatus_1.StatusCode.ServiceDisruption: {
-                            compStatusText = chalk.red('Service disruption');
-                            break;
-                        }
-                        case dockerstatus_1.StatusCode.SecurityEvent: {
-                            compStatusText = chalk.red('Security event');
-                            break;
-                        }
-                    }
-                    core.info(`  • ${compStatusText}${new Array(40 - compStatusText.length).join(' ')} ${component.name}`);
-                }));
-                // Incidents
-                if (status.result.incidents != undefined && ((_b = status.result.incidents) === null || _b === void 0 ? void 0 : _b.length) > 0) {
-                    yield utilm.asyncForEach(status.result.incidents, (incident) => __awaiter(this, void 0, void 0, function* () {
-                        let inccol;
-                        switch (incident.status_code) {
-                            case dockerstatus_1.StatusCode.DegradedPerformance: {
-                                inccol = chalk.magenta;
-                                break;
-                            }
-                            case dockerstatus_1.StatusCode.PartialServiceDisruption: {
-                                inccol = chalk.yellow;
-                                break;
-                            }
-                            case dockerstatus_1.StatusCode.ServiceDisruption: {
-                                inccol = chalk.red;
-                                break;
-                            }
-                            case dockerstatus_1.StatusCode.SecurityEvent: {
-                                inccol = chalk.red;
-                                break;
-                            }
-                            default: {
-                                inccol = chalk.white;
-                                break;
-                            }
-                        }
-                        core.info(`\n• ${inccol.bold(incident.name)}`);
-                        // Incident messages
-                        yield utilm.asyncForEach(incident.messages, (message) => __awaiter(this, void 0, void 0, function* () {
-                            const incdate = new Date(message.datetime).toLocaleDateString('en-US', {
-                                day: '2-digit',
-                                month: '2-digit',
-                                year: 'numeric',
-                                hour: '2-digit',
-                                minute: '2-digit',
-                                hour12: false
-                            });
-                            core.info(`  • ${chalk.gray(incdate)} - ${message.details}`);
-                        }));
-                    }));
-                    // Check unhealthy
-                    if (unhealthy.length > 0) {
-                        core.info(`\n• ${chalk.bgRed(`Unhealthy`)}`);
-                        yield utilm.asyncForEach(unhealthy, (text) => __awaiter(this, void 0, void 0, function* () {
-                            core.info(`  • ${text}`);
-                        }));
-                        core.setFailed(`Docker is unhealthy. Following your criteria, the job has been marked as failed.`);
-                        return;
-                    }
-                }
-            }
-        }
-        catch (error) {
-            core.setFailed(error.message);
-        }
-    });
-}
-function getStatus(input) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const value = core.getInput(input);
-        const statusCode = dockerstatus_1.StatusNames.get(value);
-        if (value != '' && statusCode === undefined) {
-            throw new Error(`Status ${value} does not exist`);
-        }
-        return statusCode;
-    });
-}
-run();
-//# sourceMappingURL=main.js.map
-
-/***/ }),
-
-/***/ 24:
-/***/ (function(__unused_webpack_module, exports) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.asyncForEach = void 0;
-const asyncForEach = (array, callback) => __awaiter(void 0, void 0, void 0, function* () {
-    for (let index = 0; index < array.length; index++) {
-        yield callback(array[index], index, array);
-    }
-});
-exports.asyncForEach = asyncForEach;
-//# sourceMappingURL=util.js.map
-
-/***/ }),
-
 /***/ 351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -674,8 +399,9 @@ exports.toCommandValue = toCommandValue;
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
+var __webpack_unused_export__;
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
+__webpack_unused_export__ = ({ value: true });
 const http = __nccwpck_require__(605);
 const https = __nccwpck_require__(211);
 const pm = __nccwpck_require__(443);
@@ -709,16 +435,16 @@ var HttpCodes;
     HttpCodes[HttpCodes["BadGateway"] = 502] = "BadGateway";
     HttpCodes[HttpCodes["ServiceUnavailable"] = 503] = "ServiceUnavailable";
     HttpCodes[HttpCodes["GatewayTimeout"] = 504] = "GatewayTimeout";
-})(HttpCodes = exports.HttpCodes || (exports.HttpCodes = {}));
+})(HttpCodes = exports.o8 || (exports.o8 = {}));
 var Headers;
 (function (Headers) {
     Headers["Accept"] = "accept";
     Headers["ContentType"] = "content-type";
-})(Headers = exports.Headers || (exports.Headers = {}));
+})(Headers = exports.PM || (exports.PM = {}));
 var MediaTypes;
 (function (MediaTypes) {
     MediaTypes["ApplicationJson"] = "application/json";
-})(MediaTypes = exports.MediaTypes || (exports.MediaTypes = {}));
+})(MediaTypes = exports.Tr || (exports.Tr = {}));
 /**
  * Returns the proxy URL, depending upon the supplied url and proxy environment variables.
  * @param serverUrl  The server URL where the request will be sent. For example, https://api.github.com
@@ -727,7 +453,7 @@ function getProxyUrl(serverUrl) {
     let proxyUrl = pm.getProxyUrl(new URL(serverUrl));
     return proxyUrl ? proxyUrl.href : '';
 }
-exports.getProxyUrl = getProxyUrl;
+__webpack_unused_export__ = getProxyUrl;
 const HttpRedirectCodes = [
     HttpCodes.MovedPermanently,
     HttpCodes.ResourceMoved,
@@ -751,7 +477,7 @@ class HttpClientError extends Error {
         Object.setPrototypeOf(this, HttpClientError.prototype);
     }
 }
-exports.HttpClientError = HttpClientError;
+__webpack_unused_export__ = HttpClientError;
 class HttpClientResponse {
     constructor(message) {
         this.message = message;
@@ -768,12 +494,12 @@ class HttpClientResponse {
         });
     }
 }
-exports.HttpClientResponse = HttpClientResponse;
+__webpack_unused_export__ = HttpClientResponse;
 function isHttps(requestUrl) {
     let parsedUrl = new URL(requestUrl);
     return parsedUrl.protocol === 'https:';
 }
-exports.isHttps = isHttps;
+__webpack_unused_export__ = isHttps;
 class HttpClient {
     constructor(userAgent, handlers, requestOptions) {
         this._ignoreSslError = false;
@@ -1210,7 +936,7 @@ class HttpClient {
         });
     }
 }
-exports.HttpClient = HttpClient;
+exports.eN = HttpClient;
 
 
 /***/ }),
@@ -3639,6 +3365,17 @@ module.exports = require("util");;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nccwpck_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__nccwpck_require__.nmd = (module) => {
@@ -3651,13 +3388,267 @@ module.exports = require("util");;
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";/************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(109);
-/******/ 	module.exports = __webpack_exports__;
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+// ESM COMPAT FLAG
+__nccwpck_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/chalk/source/index.js
+var source = __nccwpck_require__(818);
+// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
+var core = __nccwpck_require__(186);
+// EXTERNAL MODULE: ./node_modules/@actions/http-client/index.js
+var http_client = __nccwpck_require__(925);
+;// CONCATENATED MODULE: ./src/dockerstatus.ts
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var StateCode;
+(function (StateCode) {
+    StateCode[StateCode["Investigating"] = 100] = "Investigating";
+    StateCode[StateCode["MajorIdentified"] = 200] = "MajorIdentified";
+    StateCode[StateCode["CriticalMonitoring"] = 300] = "CriticalMonitoring";
+})(StateCode || (StateCode = {}));
+var StatusCode;
+(function (StatusCode) {
+    StatusCode[StatusCode["Operational"] = 100] = "Operational";
+    StatusCode[StatusCode["DegradedPerformance"] = 300] = "DegradedPerformance";
+    StatusCode[StatusCode["PartialServiceDisruption"] = 400] = "PartialServiceDisruption";
+    StatusCode[StatusCode["ServiceDisruption"] = 500] = "ServiceDisruption";
+    StatusCode[StatusCode["SecurityEvent"] = 600] = "SecurityEvent";
+})(StatusCode || (StatusCode = {}));
+var Component;
+(function (Component) {
+    Component["DockerPackageRepositories"] = "582c71aa40855b4d0e000240";
+    Component["DockerHubWeb"] = "533c6539221ae15e3f000040";
+    Component["DockerHubRegistry"] = "5342d1b837768a325c00000b";
+    Component["DockerHubAutomatedBuilds"] = "5342bc9420974b775d000008";
+    Component["DockerWeb"] = "53a1c83e814a437c5a00075a";
+    Component["DockerDocs"] = "5347131d545b2f12640000bc";
+    Component["DockerCommunityForums"] = "55b15ea10a54eb8c71000ebf";
+    Component["DockerSupportSite"] = "57f296dbe1401094660008e1";
+})(Component || (Component = {}));
+const StateNames = new Map([
+    ['investigating', StateCode.Investigating],
+    ['major_identified', StateCode.MajorIdentified],
+    ['critical_monitoring', StateCode.CriticalMonitoring]
+]);
+const StatusNames = new Map([
+    ['operational', StatusCode.Operational],
+    ['degraded_performance', StatusCode.DegradedPerformance],
+    ['partial_service_disruption', StatusCode.PartialServiceDisruption],
+    ['service_disruption', StatusCode.ServiceDisruption],
+    ['security_event', StatusCode.SecurityEvent]
+]);
+const getStatesName = (stateCode) => {
+    for (let [key, val] of StateNames) {
+        if (val == stateCode)
+            return key;
+    }
+};
+const getStatusName = (statusCode) => {
+    for (let [key, val] of StatusNames) {
+        if (val == statusCode)
+            return key;
+    }
+};
+const dockerstatus_status = () => __awaiter(void 0, void 0, void 0, function* () {
+    const http = new http_client/* HttpClient */.eN('ghaction-docker-status');
+    return (yield http.getJson(`https://api.status.io/1.0/status/533c6539221ae15e3f000031`)).result;
+});
+
+;// CONCATENATED MODULE: ./src/util.ts
+var util_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const asyncForEach = (array, callback) => util_awaiter(void 0, void 0, void 0, function* () {
+    for (let index = 0; index < array.length; index++) {
+        yield callback(array[index], index, array);
+    }
+});
+
+;// CONCATENATED MODULE: ./src/main.ts
+var main_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+process.env.FORCE_COLOR = '2';
+
+
+
+
+
+let unhealthy = [];
+function run() {
+    var _a, _b;
+    return main_awaiter(this, void 0, void 0, function* () {
+        try {
+            const status = yield dockerstatus_status();
+            if (status == null) {
+                core.setFailed(`Unable to contact Docker status API at this time.`);
+                return;
+            }
+            const overallThreshold = yield getStatus('overall_threshold');
+            const componentsThreshold = new Map([
+                [Component.DockerPackageRepositories, yield getStatus('package_repositories_threshold')],
+                [Component.DockerHubWeb, yield getStatus('hub_web_threshold')],
+                [Component.DockerHubRegistry, yield getStatus('hub_registry_threshold')],
+                [Component.DockerHubAutomatedBuilds, yield getStatus('hub_automated_builds_threshold')],
+                [Component.DockerWeb, yield getStatus('web_threshold')],
+                [Component.DockerDocs, yield getStatus('docs_threshold')],
+                [Component.DockerCommunityForums, yield getStatus('community_forums_threshold')],
+                [Component.DockerSupportSite, yield getStatus('support_site_threshold')]
+            ]);
+            // Overall
+            if (overallThreshold !== undefined && status.result.status_overall.status_code >= overallThreshold) {
+                unhealthy.push(`Overall (${getStatusName(status.result.status_overall.status_code)} >= ${getStatusName(overallThreshold)})`);
+            }
+            switch (status.result.status_overall.status_code) {
+                case StatusCode.DegradedPerformance || StatusCode.PartialServiceDisruption: {
+                    core.warning(`Docker status: ${status.result.status_overall.status}`);
+                    break;
+                }
+                case StatusCode.ServiceDisruption || StatusCode.SecurityEvent: {
+                    core.error(`Docker status: ${status.result.status_overall.status}`);
+                    break;
+                }
+                default: {
+                    core.info(`Docker status: ${status.result.status_overall.status}`);
+                    break;
+                }
+            }
+            // Components
+            if (status.result.status != undefined && ((_a = status.result.status) === null || _a === void 0 ? void 0 : _a.length) > 0) {
+                core.info(`\n• ${source.bold(`Components status`)}`);
+                yield asyncForEach(status.result.status, (component) => main_awaiter(this, void 0, void 0, function* () {
+                    if (!Object.values(Component).includes(component.id)) {
+                        core.info(source.cyan(`• ${component.name} is not implemented.`));
+                    }
+                    if (getStatusName(component.status_code) === undefined) {
+                        core.warning(`Cannot resolve status ${component.status_code} for ${component.name}`);
+                        return;
+                    }
+                    const compThreshold = componentsThreshold.get(component.id);
+                    if (compThreshold !== undefined && component.status_code >= compThreshold) {
+                        unhealthy.push(`${component.name} (${getStatusName(component.status_code)} >= ${getStatusName(compThreshold)})`);
+                    }
+                    let compStatusText;
+                    switch (component.status_code) {
+                        case StatusCode.Operational: {
+                            compStatusText = source.green('Operational');
+                            break;
+                        }
+                        case StatusCode.DegradedPerformance: {
+                            compStatusText = source.magenta('Degraded performance');
+                            break;
+                        }
+                        case StatusCode.PartialServiceDisruption: {
+                            compStatusText = source.yellow('Partial service disruption');
+                            break;
+                        }
+                        case StatusCode.ServiceDisruption: {
+                            compStatusText = source.red('Service disruption');
+                            break;
+                        }
+                        case StatusCode.SecurityEvent: {
+                            compStatusText = source.red('Security event');
+                            break;
+                        }
+                    }
+                    core.info(`  • ${compStatusText}${new Array(40 - compStatusText.length).join(' ')} ${component.name}`);
+                }));
+                // Incidents
+                if (status.result.incidents != undefined && ((_b = status.result.incidents) === null || _b === void 0 ? void 0 : _b.length) > 0) {
+                    yield asyncForEach(status.result.incidents, (incident) => main_awaiter(this, void 0, void 0, function* () {
+                        let inccol;
+                        switch (incident.status_code) {
+                            case StatusCode.DegradedPerformance: {
+                                inccol = source.magenta;
+                                break;
+                            }
+                            case StatusCode.PartialServiceDisruption: {
+                                inccol = source.yellow;
+                                break;
+                            }
+                            case StatusCode.ServiceDisruption: {
+                                inccol = source.red;
+                                break;
+                            }
+                            case StatusCode.SecurityEvent: {
+                                inccol = source.red;
+                                break;
+                            }
+                            default: {
+                                inccol = source.white;
+                                break;
+                            }
+                        }
+                        core.info(`\n• ${inccol.bold(incident.name)}`);
+                        // Incident messages
+                        yield asyncForEach(incident.messages, (message) => main_awaiter(this, void 0, void 0, function* () {
+                            const incdate = new Date(message.datetime).toLocaleDateString('en-US', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: false
+                            });
+                            core.info(`  • ${source.gray(incdate)} - ${message.details}`);
+                        }));
+                    }));
+                    // Check unhealthy
+                    if (unhealthy.length > 0) {
+                        core.info(`\n• ${source.bgRed(`Unhealthy`)}`);
+                        yield asyncForEach(unhealthy, (text) => main_awaiter(this, void 0, void 0, function* () {
+                            core.info(`  • ${text}`);
+                        }));
+                        core.setFailed(`Docker is unhealthy. Following your criteria, the job has been marked as failed.`);
+                        return;
+                    }
+                }
+            }
+        }
+        catch (error) {
+            core.setFailed(error.message);
+        }
+    });
+}
+function getStatus(input) {
+    return main_awaiter(this, void 0, void 0, function* () {
+        const value = core.getInput(input);
+        const statusCode = StatusNames.get(value);
+        if (value != '' && statusCode === undefined) {
+            throw new Error(`Status ${value} does not exist`);
+        }
+        return statusCode;
+    });
+}
+run();
+
+})();
+
+module.exports = __webpack_exports__;
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map
