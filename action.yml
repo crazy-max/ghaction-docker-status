@@ -13,6 +13,9 @@ inputs:
   package_repositories_threshold:
     description: 'Defines threshold for Docker package repositories to fail the job'
     required: false
+  authentication_threshold:
+    description: 'Defines threshold for Docker authentication to fail the job'
+    required: false
   hub_web_threshold:
     description: 'Defines threshold for Docker Hub web to fail the job'
     required: false
@@ -21,6 +24,9 @@ inputs:
     required: false
   hub_automated_builds_threshold:
     description: 'Defines threshold for Docker Hub automated builds to fail the job'
+    required: false
+  hub_security_scanning_threshold:
+    description: 'Defines threshold for Docker Hub security scanning to fail the job'
     required: false
   web_threshold:
     description: 'Defines threshold for Docker web to fail the job'

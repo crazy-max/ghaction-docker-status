@@ -16,7 +16,7 @@ describe('status', () => {
     [
       'status.json',
       {
-        updated: '2021-02-05T06:41:14.332Z',
+        updated: '2022-04-23T23:01:26.115Z',
         status: 'Operational',
         status_code: StatusCode.Operational
       } as StatusOverallEntity
