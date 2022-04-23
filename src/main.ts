@@ -19,9 +19,11 @@ async function run() {
     const overallThreshold: StatusCode | undefined = await getStatus('overall_threshold');
     const componentsThreshold = new Map<Component, StatusCode | undefined>([
       [Component.DockerPackageRepositories, await getStatus('package_repositories_threshold')],
+      [Component.DockerAuthentication, await getStatus('authentication_threshold')],
       [Component.DockerHubWeb, await getStatus('hub_web_threshold')],
       [Component.DockerHubRegistry, await getStatus('hub_registry_threshold')],
       [Component.DockerHubAutomatedBuilds, await getStatus('hub_automated_builds_threshold')],
+      [Component.DockerHubSecurityScanning, await getStatus('hub_security_scanning_threshold')],
       [Component.DockerWeb, await getStatus('web_threshold')],
       [Component.DockerDocs, await getStatus('docs_threshold')],
       [Component.DockerCommunityForums, await getStatus('community_forums_threshold')],
