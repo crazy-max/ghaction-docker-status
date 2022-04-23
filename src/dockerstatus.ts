@@ -129,13 +129,13 @@ export const StatusNames = new Map<string, StatusCode>([
 ]);
 
 export const getStatesName = (stateCode: StateCode): string | undefined => {
-  for (let [key, val] of StateNames) {
+  for (const [key, val] of StateNames) {
     if (val == stateCode) return key;
   }
 };
 
 export const getStatusName = (statusCode: StatusCode): string | undefined => {
-  for (let [key, val] of StatusNames) {
+  for (const [key, val] of StatusNames) {
     if (val == statusCode) return key;
   }
 };

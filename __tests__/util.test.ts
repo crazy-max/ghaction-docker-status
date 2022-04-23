@@ -1,3 +1,4 @@
+import {describe, expect, it} from '@jest/globals';
 import * as dockerstatus from '../src/dockerstatus';
 import * as util from '../src/util';
 
