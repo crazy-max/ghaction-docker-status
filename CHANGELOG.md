@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0 (2022/04/24)
+
+* Authentication and Hub security scanning status support (#24)
+* Update dev dependencies and workflow (#23)
+* Bump chalk from 4.1.0 to 4.1.1 (#7)
+* Bump @actions/core from 1.2.6 to 1.6.0 (#6 #17 #18)
+
 ## 1.1.0 (2021/04/03)
 
 * Fix status output (#5)
