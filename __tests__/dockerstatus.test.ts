@@ -1,11 +1,12 @@
+import {describe, expect, it, jest, test} from '@jest/globals';
 import * as path from 'path';
 import * as dockerstatus from '../src/dockerstatus';
 import {Status, StatusCode, StatusOverallEntity} from '../src/dockerstatus';
+import fs from 'fs';
 
 describe('dockerstatus', () => {
   it('returns docker status', async () => {
     const status = await dockerstatus.status();
-    console.log(JSON.stringify(status, null, 2));
     expect(status?.result.status_overall).not.toEqual('');
   });
 });
@@ -30,11 +31,14 @@ describe('status', () => {
     ]
   ])('given %p', async (file, expStatusOverall) => {
     jest.spyOn(dockerstatus, 'status').mockImplementation((): Promise<Status> => {
-      return <Promise<Status>>require(path.join(__dirname, 'fixtures', file));
+      return <Promise<Status>>(JSON.parse(
+        fs.readFileSync(path.join(__dirname, 'fixtures', file), {
+          encoding: 'utf8',
+          flag: 'r'
+        })
+      ) as unknown);
     });
-
     const status = await dockerstatus.status();
-    console.log(JSON.stringify(status, null, 2));
     expect(status?.result.status_overall).toEqual(expStatusOverall);
   });
 });

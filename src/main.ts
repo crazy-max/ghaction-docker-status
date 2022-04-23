@@ -1,12 +1,12 @@
 process.env.FORCE_COLOR = '2';
 
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import * as core from '@actions/core';
 import * as dockerstatus from './dockerstatus';
 import {Component, getStatusName, Status, StatusCode, StatusNames} from './dockerstatus';
 import * as utilm from './util';
 
-let unhealthy: Array<string> = [];
+const unhealthy: Array<string> = [];
 
 async function run() {
   try {
