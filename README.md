@@ -49,7 +49,7 @@ jobs:
     steps:
       -
         name: Check Docker Status
-        uses: crazy-max/ghaction-docker-status@v1
+        uses: crazy-max/ghaction-docker-status@v2
 ```
 
 ### Trigger error if Docker services are down
@@ -83,7 +83,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Check Docker Hub Status
-        uses: crazy-max/ghaction-docker-status@v1
+        uses: crazy-max/ghaction-docker-status@v2
         with:
           overall_threshold: degraded_performance
           hub_registry_threshold: service_disruption
@@ -116,7 +116,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
       -
         name: Check Docker authentication Status
-        uses: crazy-max/ghaction-docker-status@v1
+        uses: crazy-max/ghaction-docker-status@v2
         with:
           authentication_threshold: service_disruption
       -
