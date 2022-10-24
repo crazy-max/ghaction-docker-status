@@ -53,6 +53,7 @@ async function run() {
     if (status.result.status != undefined && status.result.status?.length > 0) {
       core.info(`\n• ${chalk.bold(`Components status`)}`);
       await utilm.asyncForEach(status.result.status, async component => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (!(<any>Object).values(Component).includes(component.id)) {
           core.info(chalk.cyan(`• ${component.name} is not implemented.`));
         }
