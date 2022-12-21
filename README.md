@@ -1,6 +1,6 @@
 [![GitHub release](https://img.shields.io/github/release/crazy-max/ghaction-docker-status.svg?style=flat-square)](https://github.com/crazy-max/ghaction-docker-status/releases/latest)
 [![GitHub marketplace](https://img.shields.io/badge/marketplace-docker--status-blue?logo=github&style=flat-square)](https://github.com/marketplace/actions/docker-status)
-[![Test workflow](https://img.shields.io/github/workflow/status/crazy-max/ghaction-docker-status/test?label=test&logo=github&style=flat-square)](https://github.com/crazy-max/ghaction-docker-status/actions?workflow=test)
+[![Test workflow](https://img.shields.io/github/actions/workflow/status/crazy-max/ghaction-docker-status/test.yml?branch=master&label=test&logo=github&style=flat-square)](https://github.com/crazy-max/ghaction-docker-status/actions?workflow=test)
 [![Codecov](https://img.shields.io/codecov/c/github/crazy-max/ghaction-docker-status?logo=codecov&style=flat-square)](https://codecov.io/gh/crazy-max/ghaction-docker-status)
 [![Become a sponsor](https://img.shields.io/badge/sponsor-crazy--max-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/crazy-max)
 [![Paypal Donate](https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square)](https://www.paypal.me/crazyws)
@@ -8,8 +8,6 @@
 ## About
 
 GitHub Action to check [Docker system status](https://status.docker.com/) in your workflow.
-
-If you are interested, [check out](https://github.com/crazy-max?tab=repositories&q=ghaction&type=source&language=&sort=) my other :octocat: GitHub Actions!
 
 ___
 
