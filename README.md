@@ -87,7 +87,7 @@ jobs:
           hub_registry_threshold: service_disruption
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
