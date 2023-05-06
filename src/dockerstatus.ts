@@ -104,16 +104,18 @@ export interface ContainersAffectedEntity {
 }
 
 export enum Component {
-  DockerPackageRepositories = '582c71aa40855b4d0e000240',
+  DockerHubRegistry = '5342d1b837768a325c00000b',
   DockerAuthentication = '61e1a6108e1cce053fe15fa8',
   DockerHubWeb = '533c6539221ae15e3f000040',
-  DockerHubRegistry = '5342d1b837768a325c00000b',
+  DockerDesktop = '636bddd6d7327366cd233ff0',
+  DockerBilling = '64513ac721e02f053d0ad4b0',
+  DockerPackageRepositories = '582c71aa40855b4d0e000240',
   DockerHubAutomatedBuilds = '5342bc9420974b775d000008',
   DockerHubSecurityScanning = '61bb4045682d750536ef4488',
-  DockerWeb = '53a1c83e814a437c5a00075a',
   DockerDocs = '5347131d545b2f12640000bc',
   DockerCommunityForums = '55b15ea10a54eb8c71000ebf',
-  DockerSupportSite = '57f296dbe1401094660008e1'
+  DockerSupport = '57f296dbe1401094660008e1',
+  DockerWebsite = '53a1c83e814a437c5a00075a'
 }
 
 export const StateNames = new Map<string, StateCode>([

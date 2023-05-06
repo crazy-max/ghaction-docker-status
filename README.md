@@ -131,20 +131,24 @@ jobs:
 
 Following inputs can be used as `step.with` keys
 
-| Name                               | Type    | Description                                                                         |
-|------------------------------------|---------|-------------------------------------------------------------------------------------|
-| `overall_threshold`                | String  | Defines threshold for overall status (also called rollup) of Docker to fail the job |
-| `package_repositories_threshold`   | String  | Defines threshold for Docker package repositories to fail the job                   |
-| `authentication_threshold`         | String  | Defines threshold for Docker authentication to fail the job                         |
-| `hub_web_threshold`                | String  | Defines threshold for Docker Hub web to fail the job                                |
-| `hub_registry_threshold`           | String  | Defines threshold for Docker Hub registry to fail the job                           |
-| `hub_automated_builds_threshold`   | String  | Defines threshold for Docker Hub automated builds to fail the job                   |
-| `hub_security_scanning_threshold`  | String  | Defines threshold for Docker Hub security scanning to fail the job                  |
-| `web_threshold`                    | String  | Defines threshold for Docker web to fail the job                                    |
-| `docs_threshold`                   | String  | Defines threshold for Docker docs to fail the job                                   |
-| `community_forums_threshold`       | String  | Defines threshold for Docker community forums to fail the job                       |
-| `support_site_threshold`           | String  | Defines threshold for Docker support site to fail the job                           |
+| Name                              | Type   | Description                                                                         |
+|-----------------------------------|--------|-------------------------------------------------------------------------------------|
+| `overall_threshold`               | String | Defines threshold for overall status (also called rollup) of Docker to fail the job |
+| `hub_registry_threshold`          | String | Defines threshold for Docker Hub Registry to fail the job                           |
+| `authentication_threshold`        | String | Defines threshold for Docker Authentication to fail the job                         |
+| `hub_web_threshold`               | String | Defines threshold for Docker Hub web to fail the job                                |
+| `desktop_threshold`               | String | Defines threshold for Docker Desktop to fail the job                                |
+| `billing_threshold`               | String | Defines threshold for Docker Billing to fail the job                                |
+| `package_repositories_threshold`  | String | Defines threshold for Docker Package Repositories to fail the job                   |
+| `hub_automated_builds_threshold`  | String | Defines threshold for Docker Hub Automated Builds to fail the job                   |
+| `hub_security_scanning_threshold` | String | Defines threshold for Docker Hub Security Scanning to fail the job                  |
+| `docs_threshold`                  | String | Defines threshold for Docker Docs to fail the job                                   |
+| `community_forums_threshold`      | String | Defines threshold for Docker Community Forums to fail the job                       |
+| `support_site_threshold`          | String | Defines threshold for Docker Support to fail the job                                |
+| `web_threshold`                   | String | Defines threshold for Docker.com Website to fail the job                            |
 
+> **Note**
+>
 > Accepted values for threshold are `operational`, `degraded_performance`, `partial_service_disruption`,
 > `service_disruption`, `security_event`.
 
