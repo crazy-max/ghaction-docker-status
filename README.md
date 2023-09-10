@@ -47,7 +47,7 @@ jobs:
     steps:
       -
         name: Check Docker Status
-        uses: crazy-max/ghaction-docker-status@v2
+        uses: crazy-max/ghaction-docker-status@v3
 ```
 
 ### Trigger error if Docker services are down
@@ -81,7 +81,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Check Docker Hub Status
-        uses: crazy-max/ghaction-docker-status@v2
+        uses: crazy-max/ghaction-docker-status@v3
         with:
           overall_threshold: degraded_performance
           hub_registry_threshold: service_disruption
@@ -114,7 +114,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
       -
         name: Check Docker authentication Status
-        uses: crazy-max/ghaction-docker-status@v2
+        uses: crazy-max/ghaction-docker-status@v3
         with:
           authentication_threshold: service_disruption
       -
@@ -154,11 +154,10 @@ Following inputs can be used as `step.with` keys
 
 ## Contributing
 
-Want to contribute? Awesome! The most basic way to show your support is to star the project, or to raise issues. If
-you want to open a pull request, please read the [contributing guidelines](.github/CONTRIBUTING.md).
-
-You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) or by
-making a [Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely!
+Want to contribute? Awesome! The most basic way to show your support is to star
+the project, or to raise issues. You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max)
+or by making a [PayPal donation](https://www.paypal.me/crazyws) to ensure this
+journey continues indefinitely!
 
 Thanks again for your support, it is much appreciated! :pray:
 
