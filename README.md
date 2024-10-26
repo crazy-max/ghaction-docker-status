@@ -146,11 +146,12 @@ Following inputs can be used as `step.with` keys
 | `community_forums_threshold`      | String | Defines threshold for Docker Community Forums to fail the job                       |
 | `support_site_threshold`          | String | Defines threshold for Docker Support to fail the job                                |
 | `web_threshold`                   | String | Defines threshold for Docker.com Website to fail the job                            |
+| `scout_threshold`                 | String | Defines threshold for Docker Scout to fail the job                                  |
+| `build_cloud_threshold`           | String | Defines threshold for Docker Build Cloud to fail the job                            |
 
-> **Note**
->
-> Accepted values for threshold are `operational`, `degraded_performance`, `partial_service_disruption`,
-> `service_disruption`, `security_event`.
+> [!NOTE]
+> Accepted values for a threshold are `operational`, `degraded_performance`,
+> `partial_service_disruption`, `service_disruption`, `security_event`.
 
 ## Contributing
 

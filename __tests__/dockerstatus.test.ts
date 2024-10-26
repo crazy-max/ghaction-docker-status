@@ -1,8 +1,8 @@
 import {describe, expect, it, jest, test} from '@jest/globals';
+import * as fs from 'fs';
 import * as path from 'path';
 import * as dockerstatus from '../src/dockerstatus';
 import {Status, StatusCode, StatusOverallEntity} from '../src/dockerstatus';
-import fs from 'fs';
 
 describe('dockerstatus', () => {
   it('returns docker status', async () => {
