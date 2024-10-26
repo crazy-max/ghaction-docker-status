@@ -46,6 +46,12 @@ inputs:
   web_threshold:
     description: 'Defines threshold for Docker.com Website to fail the job'
     required: false
+  scout_threshold:
+    description: 'Defines threshold for Docker Scout to fail the job'
+    required: false
+  build_cloud_threshold:
+    description: 'Defines threshold for Docker Build Cloud to fail the job'
+    required: false
 
 runs:
   using: 'node20'

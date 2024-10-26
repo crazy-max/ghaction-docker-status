@@ -29,7 +29,9 @@ async function run() {
       [Component.DockerDocs, await getStatus('docs_threshold')],
       [Component.DockerCommunityForums, await getStatus('community_forums_threshold')],
       [Component.DockerSupport, await getStatus('support_site_threshold')],
-      [Component.DockerWebsite, await getStatus('web_threshold')]
+      [Component.DockerWebsite, await getStatus('web_threshold')],
+      [Component.DockerScout, await getStatus('scout_threshold')],
+      [Component.DockerBuildCloud, await getStatus('build_cloud_threshold')]
     ]);
 
     // Overall
