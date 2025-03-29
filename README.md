@@ -148,6 +148,7 @@ Following inputs can be used as `step.with` keys
 | `web_threshold`                   | String | Defines threshold for Docker.com Website to fail the job                            |
 | `scout_threshold`                 | String | Defines threshold for Docker Scout to fail the job                                  |
 | `build_cloud_threshold`           | String | Defines threshold for Docker Build Cloud to fail the job                            |
+| `testcontainers_cloud_threshold`  | String | Defines threshold for Testcontainers Cloud to fail the job                          |
 
 > [!NOTE]
 > Accepted values for a threshold are `operational`, `degraded_performance`,
