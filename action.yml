@@ -55,6 +55,9 @@ inputs:
   testcontainers_cloud_threshold:
     description: 'Defines threshold for Testcontainers Cloud to fail the job'
     required: false
+  cloud_threshold:
+    description: 'Defines threshold for Docker Cloud to fail the job'
+    required: false
 
 runs:
   using: 'node20'
