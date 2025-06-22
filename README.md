@@ -129,7 +129,7 @@ jobs:
 
 ### inputs
 
-Following inputs can be used as `step.with` keys
+The following inputs can be used as `step.with` keys
 
 | Name                              | Type   | Description                                                                         |
 |-----------------------------------|--------|-------------------------------------------------------------------------------------|
@@ -149,6 +149,7 @@ Following inputs can be used as `step.with` keys
 | `scout_threshold`                 | String | Defines threshold for Docker Scout to fail the job                                  |
 | `build_cloud_threshold`           | String | Defines threshold for Docker Build Cloud to fail the job                            |
 | `testcontainers_cloud_threshold`  | String | Defines threshold for Testcontainers Cloud to fail the job                          |
+| `cloud_threshold`                 | String | Defines threshold for Docker Cloud to fail the job                                  |
 
 > [!NOTE]
 > Accepted values for a threshold are `operational`, `degraded_performance`,
