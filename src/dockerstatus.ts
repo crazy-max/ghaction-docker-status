@@ -119,7 +119,9 @@ export enum Component {
   DockerScout = '6513f7ae436354053158aa06',
   DockerBuildCloud = '659436deec9260052dcd9647',
   TestcontainersCloud = '67dae0859f0db7157a226a19',
-  DockerCloud = '6849a7d9ff590105def62138'
+  DockerCloud = '6849a7d9ff590105def62138',
+  DockerOffload = '691c5f959f865005ea5ce8da',
+  DockerHardenedImages = '6883dcaeb8a4e804fad86442'
 }
 
 export const StateNames = new Map<string, StateCode>([
