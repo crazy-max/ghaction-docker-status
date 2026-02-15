@@ -58,6 +58,12 @@ inputs:
   cloud_threshold:
     description: 'Defines threshold for Docker Cloud to fail the job'
     required: false
+  offload_threshold:
+    description: 'Defines threshold for Docker Offload to fail the job'
+    required: false
+  hardened_images_threshold:
+    description: 'Defines threshold for Docker Hardened Images to fail the job'
+    required: false
 
 runs:
   using: 'node20'
