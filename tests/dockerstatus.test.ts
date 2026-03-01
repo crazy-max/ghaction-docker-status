@@ -1,12 +1,9 @@
 import {describe, expect, it, test, vi} from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
-import {fileURLToPath} from 'node:url';
 
 import * as dockerstatus from '../src/dockerstatus.js';
 import {Status, StatusCode, StatusOverallEntity} from '../src/dockerstatus.js';
-
-const testDir = path.dirname(fileURLToPath(import.meta.url));
 
 describe('dockerstatus', () => {
   it('returns docker status', async () => {
@@ -36,7 +33,7 @@ describe('status', () => {
   ])('given %o', async (file, expStatusOverall) => {
     vi.spyOn(dockerstatus, 'status').mockImplementation((): Promise<Status> => {
       return <Promise<Status>>(JSON.parse(
-        fs.readFileSync(path.join(testDir, 'fixtures', file), {
+        fs.readFileSync(path.join(__dirname, 'fixtures', file), {
           encoding: 'utf8',
           flag: 'r'
         })
