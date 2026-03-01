@@ -21,7 +21,7 @@ export default defineConfig([
     }
   },
   {
-    files: ['__tests__/**'],
+    files: ['tests/**'],
     ...vitest.configs.recommended,
     languageOptions: {
       globals: {
