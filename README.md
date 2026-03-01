@@ -47,7 +47,7 @@ jobs:
     steps:
       -
         name: Check Docker Status
-        uses: crazy-max/ghaction-docker-status@v3
+        uses: crazy-max/ghaction-docker-status@v4
 ```
 
 ### Trigger error if Docker services are down
@@ -68,29 +68,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       -
         name: Login to DockerHub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Check Docker Hub Status
-        uses: crazy-max/ghaction-docker-status@v3
+        uses: crazy-max/ghaction-docker-status@v4
         with:
           overall_threshold: degraded_performance
           hub_registry_threshold: service_disruption
       -
         name: Build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ./Dockerfile
           push: true
           tags: user/app:latest
 ```
@@ -107,19 +102,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
         name: Check Docker authentication Status
-        uses: crazy-max/ghaction-docker-status@v3
+        uses: crazy-max/ghaction-docker-status@v4
         with:
           authentication_threshold: service_disruption
       -
         name: Login to DockerHub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
