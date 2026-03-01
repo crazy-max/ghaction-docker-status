@@ -2,9 +2,10 @@ process.env.FORCE_COLOR = '2';
 
 import chalk from 'chalk';
 import * as core from '@actions/core';
-import * as dockerstatus from './dockerstatus';
-import {Component, getStatusName, Status, StatusCode, StatusNames} from './dockerstatus';
-import * as utilm from './util';
+
+import * as dockerstatus from './dockerstatus.js';
+import {Component, getStatusName, Status, StatusCode, StatusNames} from './dockerstatus.js';
+import * as utilm from './util.js';
 
 const unhealthy: Array<string> = [];
 
